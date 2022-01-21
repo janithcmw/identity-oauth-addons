@@ -585,6 +585,9 @@ public class JWTValidator {
         if (rejectBeforeInMinutes > 0) {
             long issuedAtTimeMillis = issuedAtTime.getTime();
             long rejectBeforeMillis = 1000L * 60 * rejectBeforeInMinutes;
+            log.info("ZEOMEGASUB-81 >>> issuedAtTimeMillis : " + issuedAtTimeMillis + ", rejectBeforeMillis : "
+                    + rejectBeforeMillis + ", (currentTimeInMillis + timeStampSkewMillis - issuedAtTimeMillis) : "
+                    + (currentTimeInMillis + timeStampSkewMillis - issuedAtTimeMillis));
             if (currentTimeInMillis + timeStampSkewMillis - issuedAtTimeMillis >
                     rejectBeforeMillis) {
                 String logMsg = getTokenTooOldMessage(currentTimeInMillis, timeStampSkewMillis, issuedAtTimeMillis,
